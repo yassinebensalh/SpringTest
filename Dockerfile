@@ -19,4 +19,4 @@ FROM adoptopenjdk/openjdk11:jre-11.0.9_11-alpine
 # set deployment directory
 WORKDIR /opt/demo
 # copy over the built artifact from the maven image
-COPY --from=stage1 /opt/demo/target/stationSki.jar /opt/demo
+COPY --from=stage1 /opt/demo/target/*.jar /opt/demo
