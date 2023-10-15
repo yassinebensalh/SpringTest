@@ -15,7 +15,7 @@ public class LoggingAspect {
     @Before("execution(* com.example.stationski.services.*.*())")
     public void logMethodEntry(JoinPoint joinPoint) {
         String name = joinPoint.getSignature().getName();
-        log.info("In method : " + name + " : ");
+        log.info("In method : " + name + " yassine : ");
     }
 
     @AfterReturning("execution( * com.example.stationski.services.SkieurService.*(..))")

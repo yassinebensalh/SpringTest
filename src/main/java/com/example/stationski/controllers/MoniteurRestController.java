@@ -10,8 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -26,6 +28,7 @@ public class MoniteurRestController {
     @GetMapping("/retrieve-all-moniteurs")
     public List<Moniteur> getAbonnements() {
         List<Moniteur> listMoniteurs = moniteurService.retrieveAllMoniteurs();
+        System.out.print(listMoniteurs.get(0).getNomM());
         return listMoniteurs;
     }
 

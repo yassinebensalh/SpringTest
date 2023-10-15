@@ -30,14 +30,14 @@ public class OpenAPIConfig {
     }
 
 
-    @Bean
+    /*@Bean
     public GroupedOpenApi productPublicApi() {
         return GroupedOpenApi.builder()
                 .group("SKI STATION Management API")
-                .pathsToMatch("/**/**")
-                .pathsToExclude("**")
-                .build();
-    }
+               // .pathsToMatch("/**/// **")
+             //   .pathsToExclude("**")
+               // .build();
+   //  }*/
 
 
 }
