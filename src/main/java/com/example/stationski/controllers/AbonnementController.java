@@ -33,7 +33,6 @@ public class AbonnementController {
     public List<Abonnement> getAbonnementsByDates(@PathVariable("date1") @DateTimeFormat(pattern= "yyyy-MM-dd")  LocalDate startDate,
                                                      @PathVariable("date2") @DateTimeFormat(pattern= "yyyy-MM-dd")  LocalDate endDate){
                                                      
-//                                                     System.out.println("voici un test pour le commit stage");
                                                      System.out.println("same one with english tho");
                                                      System.out.println("same one with english tho");
         return abonnementService.retrieveAbonnementByDates(startDate, endDate);
