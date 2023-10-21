@@ -1,0 +1,64 @@
+----------------------------------------------------------------
+Mon Oct 16 16:58:05 WAT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018b-3935-7233-000002aa0d88 
+on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\3a4505dd-7152-4ca6-bd4e-45d62b8808a6 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+Loaded from file:/C:/Users/user/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Microsoft
+java.runtime.version=11.0.12+7
+user.dir=C:\Users\user\Desktop\devops JUnit\SpringTest-main
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Oct 16 16:58:06 WAT 2023:
+Shutting down instance a816c00e-018b-3935-7233-000002aa0d88 on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\3a4505dd-7152-4ca6-bd4e-45d62b8808a6 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+----------------------------------------------------------------
+Mon Oct 16 17:04:51 WAT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 0ddd00a9-018b-3935-7233-000002aa0d88 
+on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\2c2ea808-0d3b-40e6-89c7-6be870e66fb4 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+Loaded from file:/C:/Users/user/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Microsoft
+java.runtime.version=11.0.12+7
+user.dir=C:\Users\user\Desktop\devops JUnit\SpringTest-main
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Oct 16 17:04:52 WAT 2023:
+Shutting down instance 0ddd00a9-018b-3935-7233-000002aa0d88 on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\2c2ea808-0d3b-40e6-89c7-6be870e66fb4 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+----------------------------------------------------------------
+Mon Oct 16 17:07:21 WAT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 0b198144-018b-3935-7233-000002aa0d88 
+on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\684d24ed-5264-474f-986a-0320851c12b3 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+Loaded from file:/C:/Users/user/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Microsoft
+java.runtime.version=11.0.12+7
+user.dir=C:\Users\user\Desktop\devops JUnit\SpringTest-main
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Oct 16 17:07:21 WAT 2023:
+Shutting down instance 0b198144-018b-3935-7233-000002aa0d88 on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\684d24ed-5264-474f-986a-0320851c12b3 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+----------------------------------------------------------------
+Mon Oct 16 17:18:18 WAT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance cfcc41df-018b-3935-7233-000002aa0d88 
+on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\9aeec548-6629-4f20-b15d-41affd71d3f9 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
+Loaded from file:/C:/Users/user/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Microsoft
+java.runtime.version=11.0.12+7
+user.dir=C:\Users\user\Desktop\devops JUnit\SpringTest-main
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Oct 16 17:18:19 WAT 2023:
+Shutting down instance cfcc41df-018b-3935-7233-000002aa0d88 on database directory memory:C:\Users\user\Desktop\devops JUnit\SpringTest-main\9aeec548-6629-4f20-b15d-41affd71d3f9 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@368239c8 
