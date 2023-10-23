@@ -95,9 +95,9 @@ public class MoniteurRestController {
     }
 
     // http://localhost:8089/stationSki/moniteur/bestMoniteur
-    @Operation(description = "best moniteurs")
+ /*   @Operation(description = "best moniteurs")
     @GetMapping("/bestMoniteur")
     public Moniteur bestMoniteur() {
         return moniteurService.bestMoniteur();
-    }
+    }*/
 }

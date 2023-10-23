@@ -1,15 +1,12 @@
 package com.example.stationski.services;
 
 import com.example.stationski.entities.Moniteur;
-import com.example.stationski.repositories.CoursRepository;
 import com.example.stationski.repositories.MoniteurRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -20,8 +17,6 @@ public class MoniteurServiceImpl implements IMoniteurService{
 
     @Autowired
     MoniteurRepository moniteurRepository;
-    @Autowired
-    CoursRepository coursRepository;
     @Override
     public List<Moniteur> retrieveAllMoniteurs() {
 
@@ -55,7 +50,7 @@ public class MoniteurServiceImpl implements IMoniteurService{
         return m;
     }
 
-    @Override
+  /*  @Override
     public Moniteur  bestMoniteur() {
         AtomicReference<Moniteur> bestMoniteur = new AtomicReference<>();
         AtomicReference<Integer> nbCoursMax= new AtomicReference<>(0);
@@ -78,5 +73,5 @@ public class MoniteurServiceImpl implements IMoniteurService{
         moniteurRepository.save(bestMoniteur.get());
         log.debug(bestMoniteur.get()+"");
         return bestMoniteur.get();
-    }
+    }*/
 }
