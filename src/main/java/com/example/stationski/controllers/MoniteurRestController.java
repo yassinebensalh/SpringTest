@@ -13,15 +13,11 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@AllArgsConstructor
 @RequestMapping("/moniteur")
 @Tag(name = "Moniteur Management")
 public class MoniteurRestController {
@@ -42,7 +38,6 @@ public class MoniteurRestController {
                     content = @Content) })
     @GetMapping("/retrieve-all-moniteurs")
     public List<Moniteur> getMoniteurs() {
-        //System.out.println(listMoniteurs.size());
         return moniteurService.retrieveAllMoniteurs();
     }
 
@@ -68,8 +63,7 @@ public class MoniteurRestController {
     @Operation(description = "ajouter un moniteur")
     @PostMapping("/add-moniteur")
     public Moniteur addMoniteur(@RequestBody Moniteur m) {
-        Moniteur moniteur = moniteurService.addMoniteur(m);
-        return moniteur;
+        return moniteurService.addMoniteur(m);
     }
     @Operation(description = "supprimer un moniteur")
     // http://localhost:8089/stationSki/moniteur/remove-moniteur/1
@@ -82,22 +76,14 @@ public class MoniteurRestController {
     // http://localhost:8089/stationSki/moniteur/update-moniteur
     @PutMapping("/update-moniteur")
     public Moniteur updateMoniteur(@RequestBody Moniteur m) {
-        Moniteur moniteur= moniteurService.updateMoniteur(m);
-        return moniteur;
+        return moniteurService.updateMoniteur(m);
     }
 
     @Operation(description = "ajouter un moniteur et affecter à un cours")
     // http://localhost:8089/stationSki/moniteur/addMoniteurAndAssignToCourse
     @PostMapping("/addMoniteurAndAssignToCourse")
     public Moniteur addMoniteurAndAssignToCourse(@RequestBody Moniteur m) {
-        Moniteur moniteur = moniteurService.addMoniteurAndAssignToCourse(m);
-        return moniteur;
+        return moniteurService.addMoniteurAndAssignToCourse(m);
     }
 
-    // http://localhost:8089/stationSki/moniteur/bestMoniteur
- /*   @Operation(description = "best moniteurs")
-    @GetMapping("/bestMoniteur")
-    public Moniteur bestMoniteur() {
-        return moniteurService.bestMoniteur();
-    }*/
 }
