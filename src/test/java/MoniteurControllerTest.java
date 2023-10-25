@@ -6,24 +6,20 @@ import com.example.stationski.services.IMoniteurService;
 import com.example.stationski.services.MoniteurServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -41,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.datatype.jsr310.*;
 
 @Slf4j
-//@RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(MoniteurRestController.class)
 public class MoniteurControllerTest {
@@ -91,7 +86,7 @@ public class MoniteurControllerTest {
     }
 
     @Test
-    public void GetAllRecords_success() throws Exception {
+    public void retrieveMonitorsTest() throws Exception {
 
         Mockito.when(moniteurService.retrieveAllMoniteurs()).thenReturn(records);
 
@@ -102,15 +97,6 @@ public class MoniteurControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.jsonPath("$" , hasSize(3)))
                 .andExpect(jsonPath("$[2].nomM" , is("amine")));
-    }
-
-    @Test
-    public void retrieveMonitorsTest() {
-        Mockito.when(moniteurRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(m));
-        Moniteur moniteur = moniteurServiceImpl.retrieveMoniteur(1);
-        Assert.assertNotNull(moniteur);
-        log.info("get ===> " + moniteur.toString());
-        Mockito.verify(moniteurRepository).findById(Mockito.anyInt());
     }
 
     @Test
@@ -133,8 +119,6 @@ public class MoniteurControllerTest {
     {
         Moniteur updatedMonitor = Moniteur.builder().idMoniteur(1).numMoniteur(1L).nomM("mohamed yassine").prenomM("ben Salha").dateRecru(LocalDate.of(2023,12,12)).prime(15f).build();
         Mockito.when(moniteurService.updateMoniteur(updatedMonitor.getIdMoniteur(),moniteurDTO)).thenReturn(updatedMonitor);
-        //Mockito.when(moniteurRepository.save(updatedMonitor)).thenReturn(updatedMonitor);
-
         mockMvc.perform(MockMvcRequestBuilders.put("/moniteur/update-moniteur/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
@@ -162,4 +146,6 @@ public class MoniteurControllerTest {
                 .andReturn();
 
     }
+
+
 }

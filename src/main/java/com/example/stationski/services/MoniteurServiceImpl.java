@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +24,11 @@ public class MoniteurServiceImpl implements IMoniteurService{
 
     @Override
     public Moniteur addMoniteur(MoniteurDTO mDto) {
-        Moniteur moniteur = new Moniteur(mDto.getNumMoniteur(), mDto.getNomM(), mDto.getPrenomM(), mDto.getDateRecru(), mDto.getPrime());
-        return moniteurRepository.save(moniteur);
+        return moniteurRepository.save(new Moniteur(1 ,mDto.getNumMoniteur(), mDto.getNomM(), mDto.getPrenomM(), mDto.getDateRecru(), mDto.getPrime()));
+    }
+    @Override
+    public Moniteur addMoniteur2(Moniteur m) {
+        return moniteurRepository.save(m);
     }
 
     @Override

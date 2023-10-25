@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Data
 @ToString
 public class MoniteurDTO implements Serializable {
-
     private Long numMoniteur;
     private String nomM;
     private String prenomM;

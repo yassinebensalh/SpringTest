@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/moniteur")
 @Tag(name = "Moniteur Management")
@@ -68,8 +67,8 @@ public class MoniteurRestController {
     @PostMapping("/add-moniteur")
     public ResponseEntity<Moniteur> addMoniteur(@RequestBody MoniteurDTO m) {
         return new ResponseEntity<>(moniteurService.addMoniteur(m), HttpStatus.CREATED);
-
     }
+
     @Operation(description = "supprimer un moniteur")
     // http://localhost:8089/stationSki/moniteur/remove-moniteur/1
     @DeleteMapping("/remove-moniteur/{moniteur-id}")
