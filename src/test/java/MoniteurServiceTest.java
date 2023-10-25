@@ -35,9 +35,6 @@ import java.util.Optional;
 public class MoniteurServiceTest {
 
     private MockMvc mockMvc;
-
-   // @InjectMocks
-    //private MoniteurServiceImpl moniteurServiceImpl;
    @Mock
    private IMoniteurService moniteurService;
     @InjectMocks
@@ -88,6 +85,5 @@ public class MoniteurServiceTest {
         Moniteur ResM = moniteurServiceImpl.addMoniteur(moniteurDTO);
         log.info("second : " + ResM.toString());
         Assert.assertNotNull(ResM);
-        //Mockito.verify(moniteurRepository).save(Mockito.any());
     }
 }
