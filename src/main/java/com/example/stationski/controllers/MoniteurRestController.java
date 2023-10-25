@@ -1,6 +1,7 @@
 package com.example.stationski.controllers;
 
 import com.example.stationski.entities.Moniteur;
+import com.example.stationski.entities.MoniteurDTO;
 import com.example.stationski.services.IMoniteurService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -9,13 +10,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.AllArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
+@Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/moniteur")
@@ -59,11 +63,12 @@ public class MoniteurRestController {
 
 
 
-    // http://localhost:8089/stationSki/moniteur/add-moniteur
+    // http://localhost:8089/stationSki/moniteur/add-moniteur  ResponseEntity<Moniteur>
     @Operation(description = "ajouter un moniteur")
     @PostMapping("/add-moniteur")
-    public Moniteur addMoniteur(@RequestBody Moniteur m) {
-        return moniteurService.addMoniteur(m);
+    public ResponseEntity<Moniteur> addMoniteur(@RequestBody MoniteurDTO m) {
+        return new ResponseEntity<>(moniteurService.addMoniteur(m), HttpStatus.CREATED);
+
     }
     @Operation(description = "supprimer un moniteur")
     // http://localhost:8089/stationSki/moniteur/remove-moniteur/1
@@ -74,16 +79,9 @@ public class MoniteurRestController {
 
     @Operation(description = "modifier un moniteur")
     // http://localhost:8089/stationSki/moniteur/update-moniteur
-    @PutMapping("/update-moniteur")
-    public Moniteur updateMoniteur(@RequestBody Moniteur m) {
-        return moniteurService.updateMoniteur(m);
-    }
-
-    @Operation(description = "ajouter un moniteur et affecter à un cours")
-    // http://localhost:8089/stationSki/moniteur/addMoniteurAndAssignToCourse
-    @PostMapping("/addMoniteurAndAssignToCourse")
-    public Moniteur addMoniteurAndAssignToCourse(@RequestBody Moniteur m) {
-        return moniteurService.addMoniteurAndAssignToCourse(m);
+    @PutMapping("/update-moniteur/{moniteur-id}")
+    public ResponseEntity<Moniteur> updateMoniteur(@PathVariable("moniteur-id") Integer moniteurId, @NotNull @RequestBody MoniteurDTO m) {
+        return new ResponseEntity<>(moniteurService.updateMoniteur(moniteurId,m), HttpStatus.ACCEPTED);
     }
 
 }

@@ -1,10 +1,12 @@
 import com.example.stationski.controllers.MoniteurRestController;
 import com.example.stationski.entities.Moniteur;
+import com.example.stationski.entities.MoniteurDTO;
 import com.example.stationski.repositories.MoniteurRepository;
 import com.example.stationski.services.IMoniteurService;
 import com.example.stationski.services.MoniteurServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,33 +19,47 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import com.fasterxml.jackson.datatype.jsr310.*;
 
 @Slf4j
 //@RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
+@WebMvcTest(MoniteurRestController.class)
 public class MoniteurControllerTest {
+
+
 
     private MockMvc mockMvc;
 
-    ObjectMapper objectMapper = new ObjectMapper();
-    ObjectWriter objectWriter = objectMapper.writer();
-
+    static ObjectMapper objectMapper = new ObjectMapper();
+    static ObjectWriter objectWriter = objectMapper.writer();
+    public static String asJsonString(final Object obj) {
+        try {
+            objectMapper.registerModule(new JavaTimeModule());
+            return objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Mock
     private IMoniteurService moniteurService;
 
@@ -57,6 +73,9 @@ public class MoniteurControllerTest {
     private MoniteurRestController moniteurRestController;
 
     Moniteur m = Moniteur.builder().idMoniteur(1).numMoniteur(1L).nomM("yassine").prenomM("ben Salha").dateRecru(LocalDate.of(2023,12,12)).prime(15f).build();
+
+    MoniteurDTO moniteurDTO = MoniteurDTO.builder().numMoniteur(5L).nomM("yassine").prenomM("ben Salha").dateRecru(LocalDate.of(2023,12,12)).prime(15f).build();
+
     List<Moniteur> records = new ArrayList<Moniteur>() {
         {
             add(Moniteur.builder().idMoniteur(1).numMoniteur(1L).nomM("yassine").prenomM("ben Salha").dateRecru(LocalDate.of(2023,12,12)).prime(15f).build());
@@ -68,6 +87,7 @@ public class MoniteurControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(moniteurRestController).build();
+
     }
 
     @Test
@@ -79,6 +99,7 @@ public class MoniteurControllerTest {
                 .get("/moniteur/retrieve-all-moniteurs")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.jsonPath("$" , hasSize(3)))
                 .andExpect(jsonPath("$[2].nomM" , is("amine")));
     }
@@ -86,9 +107,59 @@ public class MoniteurControllerTest {
     @Test
     public void retrieveMonitorsTest() {
         Mockito.when(moniteurRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(m));
-        Moniteur moniteur = moniteurServiceImpl.retrieveMoniteur((int) 1);
+        Moniteur moniteur = moniteurServiceImpl.retrieveMoniteur(1);
         Assert.assertNotNull(moniteur);
         log.info("get ===> " + moniteur.toString());
         Mockito.verify(moniteurRepository).findById(Mockito.anyInt());
+    }
+
+    @Test
+    public void createMonitorTest() throws Exception
+    {
+
+        Mockito.when(moniteurServiceImpl.addMoniteur(moniteurDTO)).thenReturn(m);
+        mockMvc.perform(MockMvcRequestBuilders.post("/moniteur/add-moniteur")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .content(asJsonString(moniteurDTO)))
+                .andExpect(status().isCreated())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+    }
+
+    @Test
+
+    public void updateMonitorTest() throws Exception
+    {
+        Moniteur updatedMonitor = Moniteur.builder().idMoniteur(1).numMoniteur(1L).nomM("mohamed yassine").prenomM("ben Salha").dateRecru(LocalDate.of(2023,12,12)).prime(15f).build();
+        Mockito.when(moniteurService.updateMoniteur(updatedMonitor.getIdMoniteur(),moniteurDTO)).thenReturn(updatedMonitor);
+        //Mockito.when(moniteurRepository.save(updatedMonitor)).thenReturn(updatedMonitor);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/moniteur/update-moniteur/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .content(asJsonString(moniteurDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted())
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.nomM" , is("mohamed yassine")))
+                .andReturn();
+        Mockito.verify(moniteurService).updateMoniteur(updatedMonitor.getIdMoniteur(),moniteurDTO);
+    }
+
+    @Test
+    public void deleteMonitorTest() throws Exception
+    {
+        Mockito.when(moniteurRepository.findById(m.getIdMoniteur())).thenReturn(Optional.ofNullable(m));
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/moniteur/remove-moniteur/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
     }
 }

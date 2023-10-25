@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @Builder
+@ToString
 @Table( name = "moniteur")
 public class Moniteur implements Serializable {
 
@@ -31,6 +32,18 @@ public class Moniteur implements Serializable {
     LocalDate dateRecru,
     float prime){
         this.idMoniteur = idMoniteur;
+        this.numMoniteur = numMoniteur;
+        this.nomM = nomM;
+        this.prenomM = prenomM;
+        this.dateRecru = dateRecru;
+        this.prime = prime;
+    }
+
+    public Moniteur( Long numMoniteur,
+                     String nomM,
+                     String prenomM,
+                     LocalDate dateRecru,
+                     float prime){
         this.numMoniteur = numMoniteur;
         this.nomM = nomM;
         this.prenomM = prenomM;
