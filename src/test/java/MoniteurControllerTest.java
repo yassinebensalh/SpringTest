@@ -9,8 +9,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -145,6 +143,14 @@ public class MoniteurControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
 
+    }
+
+    @Test
+    public void JustTest() {
+        Mockito.when(moniteurRepository.findById(Mockito.anyInt())).thenReturn(Optional.ofNullable(m));
+        Moniteur moniteur = moniteurServiceImpl.retrieveMoniteur(1);
+        Assert.assertNotNull(moniteur);
+        log.info("get ===> " + moniteur.toString());
     }
 
 
