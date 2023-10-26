@@ -19,7 +19,15 @@
             <maven.compiler.target>1.8</maven.compiler.target>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+        <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>stationSki</id>
+            <name>stationSki Repository</name>
+            <url>file://${user.home}/.m2/temp-repository</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.jacoco</groupId> 
