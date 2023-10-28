@@ -188,6 +188,9 @@
                     <systemPropertyVariables>
                         <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
                     </systemPropertyVariables>
+                            <excludes>
+                                <exclude>**/entities/Moniteur.*</exclude>
+                            </excludes>
                 </configuration>
             </plugin>
 
