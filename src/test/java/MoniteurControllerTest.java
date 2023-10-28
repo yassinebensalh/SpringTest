@@ -92,7 +92,6 @@ public class MoniteurControllerTest {
                 .get("/moniteur/retrieve-all-moniteurs")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.jsonPath("$" , hasSize(3)))
                 .andExpect(jsonPath("$[2].nomM" , is("amine")));
     }
@@ -107,7 +106,6 @@ public class MoniteurControllerTest {
                         .characterEncoding("utf-8")
                         .content(asJsonString(moniteurDTO)))
                 .andExpect(status().isCreated())
-                .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
 
@@ -123,7 +121,6 @@ public class MoniteurControllerTest {
                         .content(asJsonString(moniteurDTO))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isAccepted())
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.nomM" , is("mohamed yassine")))
                 .andReturn();
@@ -140,7 +137,6 @@ public class MoniteurControllerTest {
                         .characterEncoding("utf-8")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print())
                 .andReturn();
 
     }
@@ -151,6 +147,21 @@ public class MoniteurControllerTest {
         Moniteur moniteur = moniteurServiceImpl.retrieveMoniteur(1);
         Assert.assertNotNull(moniteur);
         log.info("get ===> " + moniteur.toString());
+    }
+
+    @Test
+    public void retrieveMonitorTest() throws Exception
+    {
+        Mockito.when(moniteurService.retrieveMoniteur(Mockito.anyInt())).thenReturn(m);
+        //Mockito.when(moniteurServiceImpl.retrieveMoniteur(Mockito.anyInt())).thenReturn(m);
+        mockMvc.perform(MockMvcRequestBuilders.get("/moniteur/retrieve-moniteur/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.nomM" , is("yassine")))
+                .andReturn();
     }
 
 

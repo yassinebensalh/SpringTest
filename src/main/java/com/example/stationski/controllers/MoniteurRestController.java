@@ -57,7 +57,7 @@ public class MoniteurRestController {
     @GetMapping("/retrieve-moniteur/{moniteur-id}")
     public Moniteur retrieveMoniteur(@Parameter(description = "id of monitor to be searched")
                                          @PathVariable("moniteur-id") Integer moniteurId) {
-            return moniteurService.retrieveMoniteur(moniteurId);
+        return moniteurService.retrieveMoniteur(moniteurId);
 }
 
 
