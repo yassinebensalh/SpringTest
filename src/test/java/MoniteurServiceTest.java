@@ -1,7 +1,6 @@
 import com.example.stationski.entities.Moniteur;
 import com.example.stationski.entities.MoniteurDTO;
 import com.example.stationski.repositories.MoniteurRepository;
-import com.example.stationski.services.IMoniteurService;
 import com.example.stationski.services.MoniteurServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -49,7 +48,6 @@ public class MoniteurServiceTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         MockitoAnnotations.openMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(moniteurServiceImpl).build();
 
