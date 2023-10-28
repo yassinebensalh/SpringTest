@@ -6,7 +6,7 @@ services:
     image: mysql:8
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=stationSki
     networks:
       - springapimysql-net  
@@ -18,9 +18,8 @@ services:
     container_name: app
     depends_on:
       - mysqldb
-    build: .
-      #context: ./
-      #dockerfile: Dockerfile
+    build: 
+      dockerfile: Dockerfile
     restart: on-failure
     networks:
       - springapimysql-net
