@@ -152,7 +152,6 @@ public class MoniteurControllerTest {
     public void retrieveMonitorTest() throws Exception
     {
         Mockito.when(moniteurService.retrieveMoniteur(Mockito.anyInt())).thenReturn(m);
-        //Mockito.when(moniteurServiceImpl.retrieveMoniteur(Mockito.anyInt())).thenReturn(m);
         mockMvc.perform(MockMvcRequestBuilders.get("/moniteur/retrieve-moniteur/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")

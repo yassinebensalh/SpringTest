@@ -26,10 +26,6 @@ public class MoniteurServiceImpl implements IMoniteurService{
     public Moniteur addMoniteur(MoniteurDTO mDto) {
         return moniteurRepository.save(new Moniteur(1 ,mDto.getNumMoniteur(), mDto.getNomM(), mDto.getPrenomM(), mDto.getDateRecru(), mDto.getPrime()));
     }
-    @Override
-    public Moniteur addMoniteur2(Moniteur m) {
-        return moniteurRepository.save(m);
-    }
 
     @Override
     public Moniteur updateMoniteur(Integer moniteurId, MoniteurDTO mDto) {

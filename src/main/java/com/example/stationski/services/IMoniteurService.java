@@ -9,7 +9,6 @@ public interface IMoniteurService {
 
     List<Moniteur> retrieveAllMoniteurs();
     Moniteur addMoniteur(MoniteurDTO mDto);
-    public Moniteur addMoniteur2(Moniteur m);
     Moniteur updateMoniteur (Integer moniteurId,MoniteurDTO mDto);
     Moniteur retrieveMoniteur (Integer idMoniteur);
     void deleteMoniteur( Integer idMoniteur);

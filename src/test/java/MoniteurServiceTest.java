@@ -62,7 +62,7 @@ public class MoniteurServiceTest {
     }
 
     @Test
-    public void GetOneMonitorServiceTest(){
+    public void GetOneMonitorServiceTest() {
         Mockito.when(moniteurRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(m));
         Moniteur moniteur = moniteurServiceImpl.retrieveMoniteur(1);
         Assert.assertNotNull(moniteur);
@@ -71,11 +71,30 @@ public class MoniteurServiceTest {
     }
 
     @Test
-    public void AddMonitorsServiceTest(){
+    public void AddMonitorsServiceTest() {
         log.info("first : " + m.getNomM());
         Mockito.when(moniteurRepository.save(Mockito.any())).thenReturn(m);
         Moniteur ResM = moniteurServiceImpl.addMoniteur(moniteurDTO);
         log.info("second : " + ResM.toString());
         Assert.assertNotNull(ResM);
     }
+
+    @Test
+    public void updateMoniteurServiceTest() {
+        Moniteur updatedMonitor = Moniteur.builder().idMoniteur(1).numMoniteur(1L).nomM("mohamed yassine").prenomM("ben Salha").dateRecru(LocalDate.of(2023,12,12)).prime(15f).build();
+        log.info("first : " + moniteurDTO );
+        Mockito.when(moniteurRepository.save(updatedMonitor)).thenReturn(updatedMonitor);
+        Mockito.when(moniteurRepository.findMoniteurByIdMoniteur(Mockito.anyInt())).thenReturn(m);
+        Mockito.when(moniteurServiceImpl.updateMoniteur(updatedMonitor.getIdMoniteur(),moniteurDTO)).thenReturn(updatedMonitor);
+        Moniteur resultUpdatedMoniteur = moniteurServiceImpl.updateMoniteur(updatedMonitor.getIdMoniteur(),moniteurDTO);
+        log.info("second : " + resultUpdatedMoniteur);
+        Assertions.assertEquals("mohamed yassine" , resultUpdatedMoniteur.getNomM());
+    }
+
+    @Test
+    public void deleteMoniteurServiceTest() {
+        moniteurServiceImpl.deleteMoniteur(m.getIdMoniteur());
+        Mockito.verify(moniteurRepository).deleteById(m.getIdMoniteur());
+    }
+
 }

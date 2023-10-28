@@ -38,24 +38,4 @@ public class Moniteur implements Serializable {
         this.dateRecru = dateRecru;
         this.prime = prime;
     }
-
-    public Moniteur( Long numMoniteur,
-                     String nomM,
-                     String prenomM,
-                     LocalDate dateRecru,
-                     float prime){
-        this.numMoniteur = numMoniteur;
-        this.nomM = nomM;
-        this.prenomM = prenomM;
-        this.dateRecru = dateRecru;
-        this.prime = prime;
-    }
-
-    public Moniteur(MoniteurDTO mDto) {
-        this.numMoniteur = mDto.getNumMoniteur();
-        this.nomM = mDto.getNomM();
-        this.prenomM = mDto.getPrenomM();
-        this.dateRecru = mDto.getDateRecru();
-        this.prime = mDto.getPrime();
-    }
 }
