@@ -52,6 +52,8 @@ public class MoniteurControllerTest {
             throw new RuntimeException(e);
         }
     }
+
+
     @Mock
     private IMoniteurService moniteurService;
 
